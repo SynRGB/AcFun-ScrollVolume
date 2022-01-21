@@ -1,13 +1,19 @@
 // ==UserScript==
 // @name         AcFun滚轮调音量
 // @namespace 	 GitHub@SynthesisDu
-// @version      1.0.0
-// @description  AcFun滚轮调音量, change AcFUN's volume by scroll.
+// @version      1.1.0
+// @description  AcFun滚轮调音量, change AcFun's volume by scroll.
 // @author       GitHub@SynthesisDu
 // @include      *://www.acfun.cn/v/ac*
 // @include      *://www.acfun.cn/bangumi/aa*
+// @include      *://*.acfun.cn/v/ac*
+// @include      *://*.acfun.cn/bangumi/aa*
+// @include      *://acfun.cn/v/ac*
+// @include      *://acfun.cn/bangumi/aa*
 // @exclude      *://*.eggvod.cn/*
 // @connect      www.acfun.cn
+// @connect      *.acfun.cn
+// @connect      acfun.cn
 // @license      Mozilla Public License 2.0
 // @grant        GM_xmlhttpRequest
 // @grant        GM_log
@@ -17,9 +23,9 @@
 // @updateURL         https://github.com/SynRGB/AcFunScrollVolume/releases/new
 // ==/UserScript==
 
-// 防止和插件等版本冲突
+// 防止和Chrome插件版本冲突
 if (typeof duplicateScriptRecognition_GitHubSynthesisDu_AcFunScrollVolume == "undefined") {
-    let duplicateScriptRecognition_GitHubSynthesisDu_AcFunScrollVolume = "1.0.0";
+    let duplicateScriptRecognition_GitHubSynthesisDu_AcFunScrollVolume = "1.1.0";
     // 模拟键盘, keyCode为键值
     function pressKey (keyCode) {
         let event = document.createEvent("HTMLEvents");
@@ -27,34 +33,44 @@ if (typeof duplicateScriptRecognition_GitHubSynthesisDu_AcFunScrollVolume == "un
         event.keyCode = keyCode;
         document.dispatchEvent(event);
     }
+    // 一次滚轮滚动会触发两次按键, 用此变量做修正
+    let count_amend_singleScrollTriggeredTwoTimes = 0;
     // 待界面加载完成
     window.onload = () => {
         // 当滚动滚轮, 模拟按下↑↓
-        let scrollFunc = function (e) {
+        let scroll = function (e) {
             e = e || window.event;
             // 仅在全屏时生效
             if (document.querySelector('[data-bind-attr="screen"]') !== null) {
-                // Chrome
-                if (e.wheelDelta) {
-                    // 向上滚动
-                    if (e.wheelDelta > 0) {pressKey(38);}
-                    // 向下滚动
-                    if (e.wheelDelta < 0) {pressKey(40);}
-                    // Firefox
-                } else if (e.detail) {
-                    // 向上滚动
-                    if (e.detail > 0) {pressKey(38);}
-                    // 向下滚动
-                    if (e.detail < 0) {pressKey(40);}
+                // 一次滚轮滚动会触发两次按键, 用此变量做修正
+                if (count_amend_singleScrollTriggeredTwoTimes === 0) {
+                    // 一次滚轮滚动会触发两次按键, 用此变量做修正
+                    count_amend_singleScrollTriggeredTwoTimes = 1;
+                    // Chrome
+                    if (e.wheelDelta) {
+                        // 向上滚动
+                        if (e.wheelDelta > 0) {pressKey(38);}
+                        // 向下滚动
+                        if (e.wheelDelta < 0) {pressKey(40);}
+                        // Firefox
+                    } else if (e.detail) {
+                        // 向上滚动
+                        if (e.detail > 0) {pressKey(38);}
+                        // 向下滚动
+                        if (e.detail < 0) {pressKey(40);}
+                    }
+                } else {
+                    // 一次滚轮滚动会触发两次按键, 用此变量做修正
+                    count_amend_singleScrollTriggeredTwoTimes = 0;
                 }
             }
         };
         // 给页面绑定滑轮滚动事件 - Firefox
         if (document.addEventListener) {
-            document.addEventListener('DOMMouseScroll', scrollFunc, false);
+            document.addEventListener('DOMMouseScroll', scroll, false);
         }
         // 给页面绑定滑轮滚动事件 - Chrome, IE
-        window.onmousewheel = document.onmousewheel = scrollFunc;
+        window.onmousewheel = document.onmousewheel = scroll;
     };
     console.log("JS script AcFUNScrollVolume (AcFUN滚轮调音量) loaded, version " + duplicateScriptRecognition_GitHubSynthesisDu_AcFunScrollVolume + ". See more details at https://github.com/SynRGB/AcFunScrollVolume");
 }
