@@ -159,6 +159,7 @@ if (typeof duplicateScriptRecognition_GitHubSynthesisDu_AcFunScrollVolume == &qu
 }
 </code></pre>
 </details>
+
 ## BugFixed:
 
 - 修复单次滚轮造成双击
