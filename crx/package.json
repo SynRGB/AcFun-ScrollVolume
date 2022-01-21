@@ -1,0 +1,24 @@
+{
+  "name": "acfunscrollvolume",
+  "version": "1.1.1",
+  "description": " AcFun滚轮调音量, change AcFUN's volume by scroll.",
+  "main": "src/main.js",
+  "dependencies": {
+    "chrome": "^0.1.0",
+    "chrome-trace-event": "^1.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SynRGB/AcFunScrollVolume.git"
+  },
+  "author": "GitHub@SynthesisDu",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/SynRGB/AcFunScrollVolume/issues"
+  },
+  "homepage": "https://github.com/SynRGB/AcFunScrollVolume#readme"
+}
