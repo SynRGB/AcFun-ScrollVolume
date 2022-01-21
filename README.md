@@ -1,6 +1,6 @@
 # AcFunScrollVolume 滚轮调音量 v1.1
 
-![repository-open-graph-template](.\img\repository-open-graph-template.png)
+![repository-open-graph-template](https://i.postimg.cc/2Sx21GkW/repository-open-graph-template.png)
 
 - AcFUN滚轮调音量
 
