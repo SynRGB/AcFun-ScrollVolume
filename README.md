@@ -1,5 +1,7 @@
 # AcFunScrollVolume 滚轮调音量 v1.1
 
+![repository-open-graph-template](.\img\repository-open-graph-template.png)
+
 - AcFUN滚轮调音量
 
 - Change AcFUN's volume by scroll
