@@ -1,4 +1,4 @@
-# AcFunScrollVolume 滚轮调音量 v1.1
+# AcFunScrollVolume 滚轮调音量 v2.0
 
 ![repository-open-graph-template](https://i.postimg.cc/2Sx21GkW/repository-open-graph-template.png)
 
