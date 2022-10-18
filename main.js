@@ -14,13 +14,14 @@
 // @connect      www.acfun.cn
 // @connect      *.acfun.cn
 // @connect      acfun.cn
-// @license      Mozilla Public License 2.0
+// @license      MPL-2.0
+// @license^     Mozilla Public License 2.0
 // @grant        GM_xmlhttpRequest
 // @grant        GM_log
 // @grant        unsafeWindow
-// @homepageURL       https://github.com/SynRGB/AcFunScrollVolume
-// @contributionURL   https://github.com/SynRGB/AcFunScrollVolume
-// @updateURL         https://github.com/SynRGB/AcFunScrollVolume/releases/new
+// @homepageURL       https://github.com/SynRGB/AcFun-ScrollVolume
+// @contributionURL   https://github.com/SynRGB/AcFun-ScrollVolume
+// @updateURL         https://github.com/SynRGB/AcFun-ScrollVolume/releases/new
 // ==/UserScript==
 // 防止和Chrome插件版本冲突
 
