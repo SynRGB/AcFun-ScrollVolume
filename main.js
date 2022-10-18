@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         AcFun滚轮调音量
-// @namespace 	 GitHub@SynthesisDu
-// @version      1.1.0
+// @namespace    https://github.com/TitanRGB
+// @version      v2.0
 // @description  AcFun滚轮调音量, change AcFun's volume by scroll.
-// @author       GitHub@SynthesisDu
+// @author       https://github.com/TitanRGB
 // @include      *://www.acfun.cn/v/ac*
 // @include      *://www.acfun.cn/bangumi/aa*
 // @include      *://*.acfun.cn/v/ac*
@@ -22,55 +22,74 @@
 // @contributionURL   https://github.com/SynRGB/AcFunScrollVolume
 // @updateURL         https://github.com/SynRGB/AcFunScrollVolume/releases/new
 // ==/UserScript==
-
 // 防止和Chrome插件版本冲突
-if (typeof duplicateScriptRecognition_GitHubSynthesisDu_AcFunScrollVolume == "undefined") {
-    let duplicateScriptRecognition_GitHubSynthesisDu_AcFunScrollVolume = "1.1.0";
-    // 模拟键盘, keyCode为键值
-    function pressKey (keyCode) {
-        let event = document.createEvent("HTMLEvents");
-        event.initEvent("keydown", true, false);
-        event.keyCode = keyCode;
-        document.dispatchEvent(event);
-    }
-    // 一次滚轮滚动会触发两次按键, 用此变量做修正
-    let count_amend_singleScrollTriggeredTwoTimes = 0;
-    // 待界面加载完成
-    window.onload = () => {
-        // 当滚动滚轮, 模拟按下↑↓
-        let scroll = function (e) {
-            e = e || window.event;
-            // 仅在全屏时生效
-            if (document.querySelector('[data-bind-attr="screen"]') !== null) {
+
+// 一次滚轮滚动会触发两次按键, 用此变量做修正
+let count_amend_singleScrollTriggeredTwoTimes = 0;
+// 待界面加载完成
+window.onload = () => {
+    // 当滚动滚轮, 模拟按下↑↓
+    let scroll = function (e) {
+        e = e || window.event;
+        // 仅在全屏时生效
+        if (document.querySelector('[data-bind-attr="screen"]') !== null) {
+            // 一次滚轮滚动会触发两次按键, 用此变量做修正
+            if (count_amend_singleScrollTriggeredTwoTimes === 0) {
                 // 一次滚轮滚动会触发两次按键, 用此变量做修正
-                if (count_amend_singleScrollTriggeredTwoTimes === 0) {
-                    // 一次滚轮滚动会触发两次按键, 用此变量做修正
-                    count_amend_singleScrollTriggeredTwoTimes = 1;
-                    // Chrome
-                    if (e.wheelDelta) {
-                        // 向上滚动
-                        if (e.wheelDelta > 0) {pressKey(38);}
-                        // 向下滚动
-                        if (e.wheelDelta < 0) {pressKey(40);}
-                        // Firefox
-                    } else if (e.detail) {
-                        // 向上滚动
-                        if (e.detail > 0) {pressKey(38);}
-                        // 向下滚动
-                        if (e.detail < 0) {pressKey(40);}
+                count_amend_singleScrollTriggeredTwoTimes = 1;
+                if (e.wheelDelta) {//////////////////////////////// Chrome
+                    // 向上滚动
+                    if (e.wheelDelta > 0) {
+                        unsafeWindow.player.volume++;
                     }
-                } else {
-                    // 一次滚轮滚动会触发两次按键, 用此变量做修正
-                    count_amend_singleScrollTriggeredTwoTimes = 0;
+                    // 向下滚动
+                    if (e.wheelDelta < 0) {
+                        // pressKey(40);
+                        unsafeWindow.player.volume--;
+                    }
+                } else if (e.detail) {///////////////////////////// Firefox
+                    // 向上滚动
+                    if (e.detail > 0) {
+                        unsafeWindow.player.volume++;
+                    }
+                    // 向下滚动
+                    if (e.detail < 0) {
+                        unsafeWindow.player.volume--;
+                    }
                 }
+                // 音量显示
+                try {
+                    document.querySelector('#volumeText').remove();
+                } catch (e) {}
+                let screen = document.querySelector('[data-bind-attr="screen"]');
+                let volume = unsafeWindow.player.volume;
+                let volumeText = document.createElement('div');
+                volumeText.setAttribute('id', 'volumeText');
+                volumeText.setAttribute('style', `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 50px;
+                    color: #fff;
+                    text-shadow: 0 0 10px #000;
+                `);
+                volumeText.innerHTML = volume.toString().substring(0, 2).replace('.', '') + "%";
+                screen.appendChild(volumeText);
+                setTimeout(() => {
+                    screen.removeChild(volumeText);
+                }, 500);
+            } else {
+                // 一次滚轮滚动会触发两次按键, 用此变量做修正
+                count_amend_singleScrollTriggeredTwoTimes = 0;
             }
-        };
-        // 给页面绑定滑轮滚动事件 - Firefox
-        if (document.addEventListener) {
-            document.addEventListener('DOMMouseScroll', scroll, false);
         }
-        // 给页面绑定滑轮滚动事件 - Chrome, IE
-        window.onmousewheel = document.onmousewheel = scroll;
     };
-    console.log("JS script AcFUNScrollVolume (AcFUN滚轮调音量) loaded, version " + duplicateScriptRecognition_GitHubSynthesisDu_AcFunScrollVolume + ". See more details at https://github.com/SynRGB/AcFunScrollVolume");
-}
+    // 给页面绑定滑轮滚动事件 - Firefox
+    if (document.addEventListener) {
+        document.addEventListener('DOMMouseScroll', scroll, false);
+    }
+    // 给页面绑定滑轮滚动事件 - Chrome, IE
+    window.onmousewheel = document.onmousewheel = scroll;
+};
+console.log("JS script AcFUNScrollVolume (AcFUN滚轮调音量) loaded. See more details at https://github.com/SynRGB/AcFun-ScrollVolume");
