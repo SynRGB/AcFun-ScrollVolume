@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e50bf32-b3c9-483d-87c1-55f59b9e724a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/#README/README-zh.md" beforeDir="false" afterPath="$PROJECT_DIR$/#README/README-zh.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/codeql-analysis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/AcFUNScrollVolume.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-    </list>
+    <list default="true" id="5e50bf32-b3c9-483d-87c1-55f59b9e724a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +31,7 @@
       <option name="presentableId" value="Default" />
       <updated>1666092302331</updated>
       <workItem from="1666092303737" duration="1593000" />
+      <workItem from="1666177591180" duration="569000" />
     </task>
     <servers />
   </component>
