@@ -23,7 +23,6 @@
 // @contributionURL   https://github.com/SynRGB/AcFun-ScrollVolume
 // @updateURL         https://github.com/SynRGB/AcFun-ScrollVolume/releases/new
 // ==/UserScript==
-// 防止和Chrome插件版本冲突
 
 // 一次滚轮滚动会触发两次按键, 用此变量做修正
 let count_amend_singleScrollTriggeredTwoTimes = 0;
