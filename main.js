@@ -1,8 +1,10 @@
 // ==UserScript==
 // @name         AcFun-ScrollVolume
+// @name:zh-CN   AcFun-滚轮调音量
 // @namespace    https://github.com/TitanRGB
 // @version      2.3
-// @description  滚轮调音量, change AcFun's volume by scroll.
+// @description  change AcFun's volume by scroll
+// @description:zh-CN  滚动滚轮调节AcFun的音量
 // @author       https://github.com/TitanRGB
 // @include      *://www.acfun.cn/v/ac*
 // @include      *://www.acfun.cn/bangumi/aa*
