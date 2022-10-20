@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e50bf32-b3c9-483d-87c1-55f59b9e724a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/#README/README-zh.md" beforeDir="false" afterPath="$PROJECT_DIR$/#README/README-zh.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-    </list>
+    <list default="true" id="5e50bf32-b3c9-483d-87c1-55f59b9e724a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,7 +36,7 @@
       <workItem from="1666192672796" duration="652000" />
       <workItem from="1666209587403" duration="1351000" />
       <workItem from="1666243882520" duration="1376000" />
-      <workItem from="1666254630917" duration="2840000" />
+      <workItem from="1666254630917" duration="3199000" />
     </task>
     <servers />
   </component>
