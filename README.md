@@ -7,9 +7,8 @@
         <a href='https://openuserjs.org/scripts/TitanRGB/AcFun-ScrollVolume'><img src="https://img.shields.io/badge/-OpenUserJS-004796?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="OpenUserJS"></a>
     </p>
     <p>English | <a href='https://github.com/SynRGB/AcFun-ScrollVolume/blob/main/%23README/README-zh.md'>简体中文</a></p>
+    <p>Change AcFun's volume by scroll. | 滚动滚轮调节AcFun的音量。</p>
 </div>
-
-AcFUN 滚轮调音量 | Change AcFUN's volume by scroll
 
 ### What's new in `v2`:
 
