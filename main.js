@@ -2,7 +2,7 @@
 // @name         AcFun-ScrollVolume
 // @name:zh-CN   AcFun-滚轮调音量
 // @namespace    https://github.com/TitanRGB
-// @version      2.3
+// @version      2.4
 // @description  Change AcFun's volume by scroll.
 // @description:zh-CN  滚动滚轮调节AcFun的音量。
 // @author       https://github.com/TitanRGB
@@ -26,6 +26,7 @@
 // @homepageURL       https://github.com/SynRGB/AcFun-ScrollVolume
 // @contributionURL   https://github.com/SynRGB/AcFun-ScrollVolume
 // @updateURL         https://github.com/SynRGB/AcFun-ScrollVolume/releases/new
+// @copyright         Copyright © 2022-PRESENT, TitanRGB (https://github.com/TitanRGB)
 // ==/UserScript==
 
 // 一次滚轮滚动会触发两次按键, 用此变量做修正
