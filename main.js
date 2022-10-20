@@ -22,6 +22,7 @@
 // @grant        GM_xmlhttpRequest
 // @grant        GM_log
 // @grant        unsafeWindow
+// @charset		 UTF-8
 // @homepageURL       https://github.com/SynRGB/AcFun-ScrollVolume
 // @contributionURL   https://github.com/SynRGB/AcFun-ScrollVolume
 // @updateURL         https://github.com/SynRGB/AcFun-ScrollVolume/releases/new
