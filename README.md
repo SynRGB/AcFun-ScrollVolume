@@ -3,7 +3,7 @@
     <h1>AcFun-ScrollVolume <code>v2.3</code></h1>
 	<p>
         <a href='https://github.com/SynRGB/AcFun-ScrollVolume'><img src="https://img.shields.io/badge/-GitHub-3A3A3A?style=flat&amp;logo=GitHub&amp;logoColor=white" referrerpolicy="no-referrer" alt="GitHub"></a>
-	    <a href='https://greasyfork.org/zh-CN/scripts/453260-acfun-scrollvolume'><img src="https://img.shields.io/badge/-GreasyFork-670000?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="GreasyFork"></a>
+	    <a href='https://greasyfork.org/en/scripts/453260-acfun-scrollvolume'><img src="https://img.shields.io/badge/-GreasyFork-670000?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="GreasyFork"></a>
         <a href='https://openuserjs.org/scripts/TitanRGB/AcFun-ScrollVolume'><img src="https://img.shields.io/badge/-OpenUserJS-004796?style=flat&amp;logo=tampermonkey&amp;logoColor=white" referrerpolicy="no-referrer" alt="OpenUserJS"></a>
     </p>
     <p>English | <a href='https://github.com/SynRGB/AcFun-ScrollVolume/blob/main/%23README/README-zh.md'>简体中文</a></p>
