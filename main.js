@@ -3,7 +3,7 @@
 // @name:zh-CN   AcFun-滚轮调音量
 // @name:jpn     AcFun-スクロールボリューム
 // @namespace    https://github.com/TitanRGB
-// @version      3.0
+// @version      3.1
 // @description         Change AcFun's volume by scroll.
 // @description:zh-CN   滚动滚轮调节AcFun的音量。
 // @description:jpn     AcFunの音量をスクロールで変更します。
@@ -27,7 +27,6 @@
 // @charset		 UTF-8
 // @homepageURL       https://github.com/SynRGB/AcFun-ScrollVolume
 // @contributionURL   https://github.com/SynRGB/AcFun-ScrollVolume
-// @updateURL         https://github.com/SynRGB/AcFun-ScrollVolume/releases/new
 // @copyright         Copyright © 2022-PRESENT, TitanRGB (https://github.com/TitanRGB)
 // ==/UserScript==
 
@@ -40,132 +39,130 @@ let icon_volume_off = `
 data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjIgMjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cGF0aCBkPSJNMTUgMTFhMy45OTggMy45OTggMCAwMC0yLTMuNDY1djIuNjM2bDEuODY1IDEuODY1QTQuMDIgNC4wMiAwIDAwMTUgMTF6Ii8+CiAgICA8cGF0aCBkPSJNMTMuNTgzIDUuNTgzQTUuOTk4IDUuOTk4IDAgMDExNyAxMWE2IDYgMCAwMS0uNTg1IDIuNTg3bDEuNDc3IDEuNDc3YTguMDAxIDguMDAxIDAgMDAtMy40NDYtMTEuMjg2IDEgMSAwIDAwLS44NjMgMS44MDV6TTE4Ljc3OCAxOC43NzhsLTIuMTIxLTIuMTIxLTEuNDE0LTEuNDE0LTEuNDE1LTEuNDE1TDEzIDEzbC0yLTItMy44ODktMy44ODktMy44ODktMy44ODlhLjk5OS45OTkgMCAxMC0xLjQxNCAxLjQxNEw1LjE3MiA4SDVhMiAyIDAgMDAtMiAydjJhMiAyIDAgMDAyIDJoMWw0LjE4OCAzLjM1YS41LjUgMCAwMC44MTItLjM5di0zLjEzMWwyLjU4NyAyLjU4Ny0uMDEuMDA1YTEgMSAwIDAwLjg2IDEuODA2Yy4yMTUtLjEwMi40MjQtLjIxNC42MjctLjMzM2wyLjMgMi4zYTEuMDAxIDEuMDAxIDAgMDAxLjQxNC0xLjQxNnpNMTEgNS4wNGEuNS41IDAgMDAtLjgxMy0uMzlMOC42ODIgNS44NTQgMTEgOC4xNzJWNS4wNHoiLz4KPC9zdmc+
 `;
 
-// 一次滚轮滚动会触发两次按键, 用此变量做修正
-let count_amend_singleScrollTriggeredTwoTimes = 0;
 // 当滚动滚轮, 模拟按下↑↓
 let scroll = function (e) {
     e = e || window.event;
     // 仅在全屏时生效
     if (document.querySelector('[data-bind-attr="screen"]') !== null) {
-        // 一次滚轮滚动会触发两次按键, 用此变量做修正
-        if (count_amend_singleScrollTriggeredTwoTimes === 0) {
-            if (e.wheelDelta) {
-                // Chrome中一次滚轮滚动会触发两次按键, 用此变量做修正
-                count_amend_singleScrollTriggeredTwoTimes = 1;
-                //// Chrome
-                // 向上滚动
-                if (e.wheelDelta > 0) {
-                    unsafeWindow.player.volume++;
-                }
-                // 向下滚动
-                if (e.wheelDelta < 0) {
-                    // pressKey(40);
-                    unsafeWindow.player.volume--;
-                }
-            } else if (e.detail) {
-                //// Firefox
-                // 向上滚动
-                if (e.detail > 0) {
-                    unsafeWindow.player.volume++;
-                }
-                // 向下滚动
-                if (e.detail < 0) {
-                    unsafeWindow.player.volume--;
-                }
+        if (e.wheelDelta) {
+            //// Chrome
+            // 向上滚动
+            if (e.wheelDelta > 0) {
+                unsafeWindow.player.volume++;
             }
-            // 音量显示
-            try {
-                document.querySelector('#volumeDiv').remove();
-            } catch (e) {
+            // 向下滚动
+            if (e.wheelDelta < 0) {
+                // pressKey(40);
+                unsafeWindow.player.volume--;
             }
-            let volume = unsafeWindow.player.volume;
-            //////////////////////////////////////////////////////////////
-            let volumeIcon = document.createElement('span');
-            let volumeIconInnerSpan = document.createElement('span');
-            let volumeIconImg = document.createElement('img');
-            if (volume === 0) {
-                volumeIconImg.setAttribute('src', icon_volume_off);
-            } else {
-                volumeIconImg.setAttribute('src', icon_volume);
+        } else if (e.detail) {
+            //// Firefox
+            // 向上滚动
+            if (e.detail > 0) {
+                unsafeWindow.player.volume++;
             }
-            volumeIconImg.setAttribute('style', `
-                width: 100%;
-                height: 100%;
-                -webkit-transition: fill .15s ease-in-out;
-                transition: fill .15s ease-in-out;
-            `);
-            volumeIconInnerSpan.setAttribute('style', `
-                display: -webkit-inline-box;
-                display: -ms-inline-flexbox;
-                display: inline-flex;
-                width: 100%;
-                height: 100%;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            `);
-            volumeIcon.setAttribute('style', `
-                -webkit-box-flex: 0;
-                -ms-flex: none;
-                flex: none;
-                width: 34px;
-                height: 34px;
-            `);
-            volumeIcon.appendChild(volumeIconImg);
-            //////////////////////////////////////////////////////////////
-            let volumeSpan = document.createElement('span');
-            volumeSpan.innerHTML = volume.toString().substring(0, 2).replace('.', '') + '%';
-            volumeSpan.setAttribute('style', `
-                -webkit-box-flex: 1;
-                -ms-flex: 1;
-                flex: 1;
-                padding: 0 2px;
-                line-height: 34px;
-                text-align: center;
-            `);
-            //////////////////////////////////////////////////////////////
-            let volumeDiv = document.createElement('div');
-            volumeDiv.setAttribute('style', `
-                position: absolute;
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-align: center;
-                -ms-flex-align: center;
-                align-items: center;
-                top: 50%;
-                left: 50%;
-                min-width: 84px;
-                height: 32px;
-                padding: 8px;
-                color: #000;
-                font-size: 20px;
-                border-radius: 4px;
-                background: hsla(0,0%,100%,.8);
-                -webkit-transform: translate(-50%,-50%);
-                transform: translate(-50%,-50%);
-                z-index: 77;
-            `);
-            volumeDiv.appendChild(volumeIcon);
-            volumeDiv.appendChild(volumeSpan);
-            //////////////////////////////////////////////////////////////
-            let screen = document.querySelector('[data-bind-attr="screen"]');
-            screen.appendChild(volumeDiv);
-            setTimeout(() => {
-                screen.removeChild(volumeDiv);
-            }, 500);
-            //////////////////////////////////////////////////////////////
-        } else {
-            // 一次滚轮滚动会触发两次按键, 用此变量做修正
-            count_amend_singleScrollTriggeredTwoTimes = 0;
+            // 向下滚动
+            if (e.detail < 0) {
+                unsafeWindow.player.volume--;
+            }
         }
+        // 音量显示
+        try {
+            document.querySelector('#volumeDiv').remove();
+        } catch (e) {
+        }
+        let volume = unsafeWindow.player.volume;
+        //////////////////////////////////////////////////////////////
+        let volumeIcon = document.createElement('span');
+        let volumeIconInnerSpan = document.createElement('span');
+        let volumeIconImg = document.createElement('img');
+        if (volume < 1) {
+            volumeIconImg.setAttribute('src', icon_volume_off);
+        } else {
+            volumeIconImg.setAttribute('src', icon_volume);
+        }
+        volumeIconImg.setAttribute('style', `
+                    width: 100%;
+                    height: 100%;
+                    -webkit-transition: fill .15s ease-in-out;
+                    transition: fill .15s ease-in-out;
+                `);
+        volumeIconInnerSpan.setAttribute('style', `
+                    display: -webkit-inline-box;
+                    display: -ms-inline-flexbox;
+                    display: inline-flex;
+                    width: 100%;
+                    height: 100%;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                `);
+        volumeIcon.setAttribute('style', `
+                    -webkit-box-flex: 0;
+                    -ms-flex: none;
+                    flex: none;
+                    width: 34px;
+                    height: 34px;
+                `);
+        volumeIcon.appendChild(volumeIconImg);
+        //////////////////////////////////////////////////////////////
+        let volumeSpan = document.createElement('span');
+        // 当volume实际为100时，返回值是大于99的小数
+        // 当volume实际为0时，返回值是小于1的小数
+        if (volume > 99) {
+            volumeSpan.innerHTML = '100%';
+        } else if (volume < 1) {
+            volumeSpan.innerHTML = '0%';
+        } else if (volume > 9) {
+            volumeSpan.innerHTML = volume.toString().substring(0, 2).replace('.', '') + '%';
+        } else {
+            volumeSpan.innerHTML = volume.toString().substring(0, 1).replace('.', '') + '%';
+        }
+        volumeSpan.setAttribute('style', `
+                    -webkit-box-flex: 1;
+                    -ms-flex: 1;
+                    flex: 1;
+                    padding: 0 2px;
+                    line-height: 34px;
+                    text-align: center;
+                `);
+        //////////////////////////////////////////////////////////////
+        let volumeDiv = document.createElement('div');
+        volumeDiv.setAttribute('id', 'volumeDiv');
+        volumeDiv.setAttribute('style', `
+                    position: absolute;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    top: 50%;
+                    left: 50%;
+                    min-width: 84px;
+                    height: 32px;
+                    padding: 8px;
+                    color: #000;
+                    font-size: 20px;
+                    border-radius: 4px;
+                    background: hsla(0,0%,100%,.8);
+                    -webkit-transform: translate(-50%,-50%);
+                    transform: translate(-50%,-50%);
+                    z-index: 77;
+                `);
+        volumeDiv.appendChild(volumeIcon);
+        volumeDiv.appendChild(volumeSpan);
+        //////////////////////////////////////////////////////////////
+        let screen = document.querySelector('[data-bind-attr="screen"]');
+        screen.appendChild(volumeDiv);
+        setTimeout(() => {
+            screen.removeChild(volumeDiv);
+        }, 500);
+        //////////////////////////////////////////////////////////////
     }
 };
-// 给页面绑定滑轮滚动事件 - Firefox
-if (document.addEventListener) {
-    document.addEventListener('DOMMouseScroll', scroll, false);
-}
-// 给页面绑定滑轮滚动事件 - Chrome, IE
-window.onmousewheel = document.onmousewheel = scroll;
+document.addEventListener('wheel', function () {
+    scroll();
+}, false);
 console.log("JS script AcFUN-ScrollVolume (AcFUN-滚轮调音量) loaded. See more details at https://github.com/SynRGB/AcFun-ScrollVolume");
