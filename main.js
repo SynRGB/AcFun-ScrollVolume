@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name         AcFun-ScrollVolume
 // @name:zh-CN   AcFun-滚轮调音量
+// @name:jpn     AcFun-スクロールボリューム
 // @namespace    https://github.com/TitanRGB
-// @version      2.4
-// @description  Change AcFun's volume by scroll.
-// @description:zh-CN  滚动滚轮调节AcFun的音量。
+// @version      2.5
+// @description         Change AcFun's volume by scroll.
+// @description:zh-CN   滚动滚轮调节AcFun的音量。
+// @description:jpn     AcFunの音量をスクロールで変更します。
 // @author       https://github.com/TitanRGB
 // @icon         data:image/png;base64,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
 // @include      *://www.acfun.cn/v/ac*
@@ -38,9 +40,9 @@ let scroll = function (e) {
     if (document.querySelector('[data-bind-attr="screen"]') !== null) {
         // 一次滚轮滚动会触发两次按键, 用此变量做修正
         if (count_amend_singleScrollTriggeredTwoTimes === 0) {
-            // 一次滚轮滚动会触发两次按键, 用此变量做修正
-            count_amend_singleScrollTriggeredTwoTimes = 1;
             if (e.wheelDelta) {
+                // Chrome中一次滚轮滚动会触发两次按键, 用此变量做修正
+                count_amend_singleScrollTriggeredTwoTimes = 1;
                 //// Chrome
                 // 向上滚动
                 if (e.wheelDelta > 0) {
@@ -96,4 +98,4 @@ if (document.addEventListener) {
 }
 // 给页面绑定滑轮滚动事件 - Chrome, IE
 window.onmousewheel = document.onmousewheel = scroll;
-console.log("JS script AcFUNScrollVolume (AcFUN滚轮调音量) loaded. See more details at https://github.com/SynRGB/AcFun-ScrollVolume");
+console.log("JS script AcFUN-ScrollVolume (AcFUN-滚轮调音量) loaded. See more details at https://github.com/SynRGB/AcFun-ScrollVolume");
