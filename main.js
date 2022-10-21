@@ -3,7 +3,7 @@
 // @name:zh-CN   AcFun-滚轮调音量
 // @name:jpn     AcFun-スクロールボリューム
 // @namespace    https://github.com/TitanRGB
-// @version      2.5
+// @version      3.0
 // @description         Change AcFun's volume by scroll.
 // @description:zh-CN   滚动滚轮调节AcFun的音量。
 // @description:jpn     AcFunの音量をスクロールで変更します。
@@ -30,6 +30,15 @@
 // @updateURL         https://github.com/SynRGB/AcFun-ScrollVolume/releases/new
 // @copyright         Copyright © 2022-PRESENT, TitanRGB (https://github.com/TitanRGB)
 // ==/UserScript==
+
+// ./icon/bilibili#bpx-svg-sprite-volume
+let icon_volume = `
+data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjIgMjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cGF0aCBkPSJNMTAuMTg4IDQuNjVMNiA4SDVhMiAyIDAgMDAtMiAydjJhMiAyIDAgMDAyIDJoMWw0LjE4OCAzLjM1YS41LjUgMCAwMC44MTItLjM5VjUuMDRhLjQ5OC40OTggMCAwMC0uODEyLS4zOXpNMTQuNDQ2IDMuNzc4YTEgMSAwIDAwLS44NjIgMS44MDQgNi4wMDIgNi4wMDIgMCAwMS0uMDA3IDEwLjgzOCAxIDEgMCAwMC44NiAxLjgwNkE4LjAwMSA4LjAwMSAwIDAwMTkgMTFhOC4wMDEgOC4wMDEgMCAwMC00LjU1NC03LjIyMnoiLz4KICAgIDxwYXRoIGQ9Ik0xNSAxMWEzLjk5OCAzLjk5OCAwIDAwLTItMy40NjV2Ni45M0EzLjk5OCAzLjk5OCAwIDAwMTUgMTF6Ii8+Cjwvc3ZnPg==
+`;
+// ./icon/bilibili#bpx-svg-sprite-volume-off
+let icon_volume_off = `
+data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjIgMjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cGF0aCBkPSJNMTUgMTFhMy45OTggMy45OTggMCAwMC0yLTMuNDY1djIuNjM2bDEuODY1IDEuODY1QTQuMDIgNC4wMiAwIDAwMTUgMTF6Ii8+CiAgICA8cGF0aCBkPSJNMTMuNTgzIDUuNTgzQTUuOTk4IDUuOTk4IDAgMDExNyAxMWE2IDYgMCAwMS0uNTg1IDIuNTg3bDEuNDc3IDEuNDc3YTguMDAxIDguMDAxIDAgMDAtMy40NDYtMTEuMjg2IDEgMSAwIDAwLS44NjMgMS44MDV6TTE4Ljc3OCAxOC43NzhsLTIuMTIxLTIuMTIxLTEuNDE0LTEuNDE0LTEuNDE1LTEuNDE1TDEzIDEzbC0yLTItMy44ODktMy44ODktMy44ODktMy44ODlhLjk5OS45OTkgMCAxMC0xLjQxNCAxLjQxNEw1LjE3MiA4SDVhMiAyIDAgMDAtMiAydjJhMiAyIDAgMDAyIDJoMWw0LjE4OCAzLjM1YS41LjUgMCAwMC44MTItLjM5di0zLjEzMWwyLjU4NyAyLjU4Ny0uMDEuMDA1YTEgMSAwIDAwLjg2IDEuODA2Yy4yMTUtLjEwMi40MjQtLjIxNC42MjctLjMzM2wyLjMgMi4zYTEuMDAxIDEuMDAxIDAgMDAxLjQxNC0xLjQxNnpNMTEgNS4wNGEuNS41IDAgMDAtLjgxMy0uMzlMOC42ODIgNS44NTQgMTEgOC4xNzJWNS4wNHoiLz4KPC9zdmc+
+`;
 
 // 一次滚轮滚动会触发两次按键, 用此变量做修正
 let count_amend_singleScrollTriggeredTwoTimes = 0;
@@ -66,26 +75,87 @@ let scroll = function (e) {
             }
             // 音量显示
             try {
-                document.querySelector('#volumeText').remove();
-            } catch (e) {}
-            let screen = document.querySelector('[data-bind-attr="screen"]');
+                document.querySelector('#volumeDiv').remove();
+            } catch (e) {
+            }
             let volume = unsafeWindow.player.volume;
-            let volumeText = document.createElement('div');
-            volumeText.setAttribute('id', 'volumeText');
-            volumeText.setAttribute('style', `
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    font-size: 50px;
-                    color: #fff;
-                    text-shadow: 0 0 10px #000;
-                `);
-            volumeText.innerHTML = volume.toString().substring(0, 2).replace('.', '') + "%";
-            screen.appendChild(volumeText);
+            //////////////////////////////////////////////////////////////
+            let volumeIcon = document.createElement('span');
+            let volumeIconInnerSpan = document.createElement('span');
+            let volumeIconImg = document.createElement('img');
+            if (volume === 0) {
+                volumeIconImg.setAttribute('src', icon_volume_off);
+            } else {
+                volumeIconImg.setAttribute('src', icon_volume);
+            }
+            volumeIconImg.setAttribute('style', `
+                width: 100%;
+                height: 100%;
+                -webkit-transition: fill .15s ease-in-out;
+                transition: fill .15s ease-in-out;
+            `);
+            volumeIconInnerSpan.setAttribute('style', `
+                display: -webkit-inline-box;
+                display: -ms-inline-flexbox;
+                display: inline-flex;
+                width: 100%;
+                height: 100%;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            `);
+            volumeIcon.setAttribute('style', `
+                -webkit-box-flex: 0;
+                -ms-flex: none;
+                flex: none;
+                width: 34px;
+                height: 34px;
+            `);
+            volumeIcon.appendChild(volumeIconImg);
+            //////////////////////////////////////////////////////////////
+            let volumeSpan = document.createElement('span');
+            volumeSpan.innerHTML = volume.toString().substring(0, 2).replace('.', '') + '%';
+            volumeSpan.setAttribute('style', `
+                -webkit-box-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                padding: 0 2px;
+                line-height: 34px;
+                text-align: center;
+            `);
+            //////////////////////////////////////////////////////////////
+            let volumeDiv = document.createElement('div');
+            volumeDiv.setAttribute('style', `
+                position: absolute;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                top: 50%;
+                left: 50%;
+                min-width: 84px;
+                height: 32px;
+                padding: 8px;
+                color: #000;
+                font-size: 20px;
+                border-radius: 4px;
+                background: hsla(0,0%,100%,.8);
+                -webkit-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
+                z-index: 77;
+            `);
+            volumeDiv.appendChild(volumeIcon);
+            volumeDiv.appendChild(volumeSpan);
+            //////////////////////////////////////////////////////////////
+            let screen = document.querySelector('[data-bind-attr="screen"]');
+            screen.appendChild(volumeDiv);
             setTimeout(() => {
-                screen.removeChild(volumeText);
+                screen.removeChild(volumeDiv);
             }, 500);
+            //////////////////////////////////////////////////////////////
         } else {
             // 一次滚轮滚动会触发两次按键, 用此变量做修正
             count_amend_singleScrollTriggeredTwoTimes = 0;
