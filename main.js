@@ -3,7 +3,7 @@
 // @name:zh-CN   AcFun-滚轮调音量
 // @name:jpn     AcFun-スクロールボリューム
 // @namespace    https://github.com/TitanRGB
-// @version      3.2
+// @version      3.3
 // @description         Change AcFun's volume by scroll, imitate Bilibili's style.
 // @description:zh-CN   滚动滚轮调节AcFun的音量，模仿B站样式。
 // @description:jpn     AcFunの音量をスクロールで変更します。Bilibiliのスタイルを模倣します。
@@ -21,8 +21,6 @@
 // @connect      acfun.cn
 // @license      MPL-2.0
 // @license^     Mozilla Public License 2.0
-// @grant        GM_xmlhttpRequest
-// @grant        GM_log
 // @grant        unsafeWindow
 // @charset		 UTF-8
 // @homepageURL       https://github.com/SynRGB/AcFun-ScrollVolume
