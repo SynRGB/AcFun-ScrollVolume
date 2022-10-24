@@ -38,7 +38,7 @@ data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjIgMjIiIHhtbG5zPSJodHRwOi8vd3
 `;
 
 // 当滚动滚轮, 模拟按下↑↓
-let scroll = function (e) {
+let main = function (e) {
     e = e || window.event;
     // 仅在全屏时生效
     if (document.querySelector('[data-bind-attr="screen"]') !== null) {
@@ -160,7 +160,9 @@ let scroll = function (e) {
         //////////////////////////////////////////////////////////////
     }
 };
+
 document.addEventListener('wheel', function () {
-    scroll();
+    main();
 }, false);
+
 console.log("JS script AcFUN-ScrollVolume (AcFUN-滚轮调音量) loaded. See more details at https://github.com/SynRGB/AcFun-ScrollVolume");
