@@ -14,6 +14,8 @@
 
 滚动滚轮调节AcFun的音量。
 
+<img src="https://github.com/SynRGB/AcFun-ScrollVolume/raw/main/%23README/example.png" width="50%"/>
+
 ### `v3` 更新说明
 
 - 完全照搬B站的音量图标和CSS，显示更加美观
