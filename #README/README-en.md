@@ -12,7 +12,9 @@
 
 ## Description
 
-Change AcFun's volume by scroll.
+Change AcFun's volume by scroll, imitate Bilibili's style.
+
+<img src="https://github.com/SynRGB/AcFun-ScrollVolume/raw/main/%23README/example.png" width="50%"/>
 
 ### What's new in `v3`
 
